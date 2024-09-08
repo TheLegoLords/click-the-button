@@ -1,68 +1,50 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2487.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    span.s1 {font: 13.0px 'Helvetica Neue'}
-    span.Apple-tab-span {white-space:pre}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Click Counter</title>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Global Click Counter&lt;/title&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Global Click Counter&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;img id="clickable-image" src="<span class="s1">https://ibb.co/wsM5GS5</span>" alt="Click me!" style="cursor: pointer; width: 300px; height: auto;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;Global Clicks: &lt;span id="click-counter"&gt;0&lt;/span&gt;&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Firebase SDK --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"&gt;&lt;/script&gt;</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Firebase configuration object</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const firebaseConfig = {</p>
-<p class="p1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>apiKey: "AIzaSyAjRiHxjUD3M5tT6ZU8Zwp7nc-gyHRU4mI",</p>
-<p class="p1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>authDomain: "website-click-count.firebaseapp.com",</p>
-<p class="p1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>databaseURL: "https://website-click-count-default-rtdb.firebaseio.com",</p>
-<p class="p1"><span class="Apple-converted-space"> <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>projectId: "website-click-count",</p>
-<p class="p1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>storageBucket: "website-click-count.appspot.com",</p>
-<p class="p1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>messagingSenderId: "663118696424",</p>
-<p class="p1"><span class="Apple-converted-space">  <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>appId: "1:663118696424:web:9fb93c109479b905681e5d"</p>
-<p class="p1"><span class="Apple-tab-span">	</span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Initialize Firebase</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const app = firebase.initializeApp(firebaseConfig);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const database = firebase.database();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>const image = document.getElementById('clickable-image');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const counter = document.getElementById('click-counter');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Fetch the current counter value from Firebase</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const counterRef = database.ref('globalClicks');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>counterRef.on('value', (snapshot) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>counter.textContent = snapshot.val();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Increment the counter when the image is clicked</p>
-<p class="p1"><span class="Apple-converted-space">        </span>image.addEventListener('click', () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>counterRef.transaction((currentClicks) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>return (currentClicks || 0) + 1;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+    <h1>Global Click Counter</h1>
+    <img id="clickable-image" src="https://ibb.co/wsM5GS5" alt="Click me!" style="cursor: pointer; width: 300px; height: auto;">
+    <p>Global Clicks: <span id="click-counter">0</span></p>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+    
+    <script>
+        // Firebase configuration object
+        const firebaseConfig = {
+  		apiKey: "AIzaSyAjRiHxjUD3M5tT6ZU8Zwp7nc-gyHRU4mI",
+  		authDomain: "website-click-count.firebaseapp.com",
+  		databaseURL: "https://website-click-count-default-rtdb.firebaseio.com",
+ 		projectId: "website-click-count",
+  		storageBucket: "website-click-count.appspot.com",
+  		messagingSenderId: "663118696424",
+  		appId: "1:663118696424:web:9fb93c109479b905681e5d"
+	};
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        const image = document.getElementById('clickable-image');
+        const counter = document.getElementById('click-counter');
+
+        // Fetch the current counter value from Firebase
+        const counterRef = database.ref('globalClicks');
+        counterRef.on('value', (snapshot) => {
+            counter.textContent = snapshot.val();
+        });
+
+        // Increment the counter when the image is clicked
+        image.addEventListener('click', () => {
+            counterRef.transaction((currentClicks) => {
+                return (currentClicks || 0) + 1;
+            });
+        });
+    </script>
 </body>
 </html>
